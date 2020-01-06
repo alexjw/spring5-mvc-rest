@@ -1,6 +1,7 @@
 package guru.springfamework.bootstrap;
 
 import guru.springfamework.domain.Category;
+import guru.springfamework.domain.Customer;
 import guru.springfamework.repositories.CategoryRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -39,5 +40,11 @@ public class Bootstrap implements CommandLineRunner {
 
 
         System.out.println("Data Loaded = " + categoryRepository.count() );
+
+        Customer customer = new Customer();
+        customer.setFirstName("Alex");
+        customer.setLastName("Jines");
+
+        //customer
     }
 }

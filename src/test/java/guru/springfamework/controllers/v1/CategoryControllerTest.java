@@ -54,7 +54,7 @@ public class CategoryControllerTest {
 
         List<CategoryDTO> categories = Arrays.asList(category1, category2);
 
-        when(categoryService.getAll()).thenReturn(categories);
+        when(categoryService.getAllDTO()).thenReturn(categories);
 
         mockMvc.perform(get("/api/v1/categories/")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -70,7 +70,7 @@ public class CategoryControllerTest {
 
         when(categoryService.getByName(anyString())).thenReturn(category1);
 
-        mockMvc.perform(get("/api/v1/categories/Jim")
+        mockMvc.perform(get("/api/v1/categories/" + NAME)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", equalTo(NAME)));

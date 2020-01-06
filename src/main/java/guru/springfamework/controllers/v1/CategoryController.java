@@ -1,7 +1,7 @@
 package guru.springfamework.controllers.v1;
 
 import guru.springfamework.api.v1.model.CategoryDTO;
-import guru.springfamework.api.v1.model.CatorgoryListDTO;
+import guru.springfamework.api.v1.model.CategoryListDTO;
 import guru.springfamework.services.CategoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/api/v1/categories/")
+@RequestMapping("/api/v1/categories")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -20,15 +20,16 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping
-    public ResponseEntity<CatorgoryListDTO> getallCatetories() {
+    @GetMapping({"", "/"})
+    public ResponseEntity<CategoryListDTO> getAllCategories() {
 
-        return new ResponseEntity<CatorgoryListDTO>(
-                new CatorgoryListDTO(categoryService.getAll()), HttpStatus.OK);
+        return new ResponseEntity<CategoryListDTO>(
+                new CategoryListDTO(categoryService.getAllDTO()), HttpStatus.OK);
     }
 
-    @GetMapping("{name}")
+    @GetMapping("/{name}")
     public ResponseEntity<CategoryDTO> getCategoryByName( @PathVariable String name){
+        System.out.println(categoryService.getByName(name));
         return new ResponseEntity<CategoryDTO>(
                 categoryService.getByName(name), HttpStatus.OK
         );

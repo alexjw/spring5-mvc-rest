@@ -1,6 +1,8 @@
 package guru.springfamework.services;
 
 import guru.springfamework.api.v1.mapper.CategoryMapper;
+import guru.springfamework.api.v1.mapper.CustomerMapper;
+import guru.springfamework.api.v1.mapper.SuperMapper;
 import guru.springfamework.api.v1.model.CategoryDTO;
 import guru.springfamework.domain.Category;
 import guru.springfamework.repositories.CategoryRepository;
@@ -25,12 +27,20 @@ public class CategoryServiceTest {
     @Mock
     CategoryRepository categoryRepository;
 
+    SuperMapper superMapper;
+
+    CustomerMapper customerMapper = CustomerMapper.INSTANCE;
+
+    CategoryMapper categoryMapper = CategoryMapper.INSTANCE;;
+
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        categoryService = new CategoryServiceImpl(CategoryMapper.INSTANCE, categoryRepository);
+        SuperMapper superMapper = new SuperMapper(customerMapper, categoryMapper);
+
+        categoryService = new CategoryServiceImpl(categoryRepository, superMapper);
     }
 
     @Test
@@ -42,7 +52,7 @@ public class CategoryServiceTest {
         when(categoryRepository.findAll()).thenReturn(categories);
 
         //when
-        List<CategoryDTO> categoryDTOS = categoryService.getAll();
+        List<CategoryDTO> categoryDTOS = categoryService.getAllDTO();
 
         //then
         assertEquals(3, categoryDTOS.size());
@@ -57,7 +67,7 @@ public class CategoryServiceTest {
         category.setId(ID);
         category.setName(NAME);
 
-        when(categoryRepository.findByName(anyString())).thenReturn(category);
+        when(categoryRepository.findByNameIgnoreCase(anyString())).thenReturn(category);
 
         //when
         CategoryDTO categoryDTO = categoryService.getByName(NAME);
