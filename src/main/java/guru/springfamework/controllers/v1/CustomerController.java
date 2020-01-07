@@ -19,7 +19,7 @@ public class CustomerController {
     }
 
     @GetMapping({"", "/"})
-    public ResponseEntity<CustomerListDTO> getAllCategories() {
+    public ResponseEntity<CustomerListDTO> getAllCustomers() {
 
         return new ResponseEntity<CustomerListDTO>(
                 new CustomerListDTO(customerService.getAllDTO()), HttpStatus.OK);

@@ -58,6 +58,22 @@ public class CustomerServiceImpl extends BaseService<Customer, CustomerDTO, Cust
         return result;
     }
 
+    @Override
+    public CustomerDTO patch(Long id, CustomerDTO dto) {
+        return repository.findById(id).map(customer -> {
+
+            if(dto.getFirstName() != null){
+                customer.setFirstName(dto.getFirstName());
+            }
+
+            if(dto.getLastName() != null){
+                customer.setLastName(dto.getLastName());
+            }
+
+            return superMapper.customerMapper.customerToCustomerDTO(repository.save(customer));
+        }).orElseThrow(RuntimeException::new);
+    }
+
     /*@Override
     public Customer save(Long id, Customer customer) {
         return null;

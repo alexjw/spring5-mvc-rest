@@ -65,6 +65,11 @@ public class CategoryServiceImpl extends BaseService<Category, CategoryDTO, Cate
         return result;
     }
 
+    @Override
+    public CategoryDTO patch(Long id, CategoryDTO dto) {
+        return null;
+    }
+
     /*@Override
     public Category save(Long id, Category category) {
         return repository.save(category);
