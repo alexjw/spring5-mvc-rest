@@ -2,6 +2,7 @@ package guru.springfamework.services;
 
 import guru.springfamework.api.v1.mapper.SuperMapper;
 import guru.springfamework.api.v1.model.CustomerDTO;
+import guru.springfamework.domain.Category;
 import guru.springfamework.domain.Customer;
 import guru.springfamework.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,14 @@ public class CustomerServiceImpl extends BaseService<Customer, CustomerDTO, Cust
 
     @Override
     public CustomerDTO getById(Long id) {
-        return superMapper.customerMapper.customerToCustomerDTO(getDomainById(id));
+        return repository.findById(id)
+                .map(superMapper.customerMapper::customerToCustomerDTO)
+                .map(customerDTO -> {
+                    //set API URL
+                    customerDTO.setUrl("/api/v1/customer/" + id);
+                    return customerDTO;
+                })
+                .orElseThrow(RuntimeException::new);
     }
 
     @Override
@@ -39,5 +47,20 @@ public class CustomerServiceImpl extends BaseService<Customer, CustomerDTO, Cust
 
         return returnDto;
     }
+
+    @Override
+    public CustomerDTO save(Long id, CustomerDTO dto) {
+        Customer customer = superMapper.customerMapper.customerDTOToCustomer(dto);
+        customer.setId(id);
+
+        CustomerDTO result = superMapper.customerMapper.customerToCustomerDTO(save(id, customer));
+        result.setUrl("/api/v1/customer/" + id);
+        return result;
+    }
+
+    /*@Override
+    public Customer save(Long id, Customer customer) {
+        return null;
+    }*/
 
 }

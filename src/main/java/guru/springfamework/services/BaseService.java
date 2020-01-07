@@ -30,4 +30,8 @@ public abstract class BaseService<DOM extends BaseDomain, DTO extends BaseDTO, R
 
     abstract List<DTO> getAllDTO();
 
+    public DOM save(Long id, DOM dom) {
+        return repository.save(dom);
+    }
+
 }
