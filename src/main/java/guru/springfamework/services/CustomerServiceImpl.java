@@ -28,7 +28,7 @@ public class CustomerServiceImpl extends BaseService<Customer, CustomerDTO, Cust
                 .map(superMapper.customerMapper::customerToCustomerDTO)
                 .map(customerDTO -> {
                     //set API URL
-                    customerDTO.setUrl("/api/v1/customer/" + id);
+                    customerDTO.setUrl("/api/v1/customers/" + id);
                     return customerDTO;
                 })
                 .orElseThrow(RuntimeException::new);
@@ -43,7 +43,7 @@ public class CustomerServiceImpl extends BaseService<Customer, CustomerDTO, Cust
 
         CustomerDTO returnDto = superMapper.customerMapper.customerToCustomerDTO(savedCustomer);
 
-        returnDto.setUrl("/api/v1/customer/" + savedCustomer.getId());
+        returnDto.setUrl("/api/v1/customers/" + savedCustomer.getId());
 
         return returnDto;
     }
@@ -54,7 +54,7 @@ public class CustomerServiceImpl extends BaseService<Customer, CustomerDTO, Cust
         customer.setId(id);
 
         CustomerDTO result = superMapper.customerMapper.customerToCustomerDTO(save(id, customer));
-        result.setUrl("/api/v1/customer/" + id);
+        result.setUrl("/api/v1/customers/" + id);
         return result;
     }
 

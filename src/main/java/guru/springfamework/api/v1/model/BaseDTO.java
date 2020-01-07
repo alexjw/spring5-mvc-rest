@@ -11,7 +11,7 @@ public class BaseDTO {
 
     private Long id;
 
-    @JsonProperty("customer_url")
+    @JsonProperty("url")
     private String url;
 
 }

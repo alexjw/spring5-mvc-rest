@@ -36,7 +36,7 @@ public class CategoryServiceImpl extends BaseService<Category, CategoryDTO, Cate
                 .map(superMapper.categoryMapper::categoryToCategoryDTO)
                 .map(categoryDTO -> {
                     //set API URL
-                    categoryDTO.setUrl("/api/v1/category/" + id);
+                    categoryDTO.setUrl("/api/v1/categories/" + id);
                     return categoryDTO;
                 })
                 .orElseThrow(RuntimeException::new);
@@ -50,7 +50,7 @@ public class CategoryServiceImpl extends BaseService<Category, CategoryDTO, Cate
 
         CategoryDTO returnDto = superMapper.categoryMapper.categoryToCategoryDTO(savedCategory);
 
-        returnDto.setUrl("/api/v1/category/" + savedCategory.getId());
+        returnDto.setUrl("/api/v1/categories/" + savedCategory.getId());
 
         return returnDto;
     }
@@ -61,7 +61,7 @@ public class CategoryServiceImpl extends BaseService<Category, CategoryDTO, Cate
         category.setId(id);
 
         CategoryDTO result = superMapper.categoryMapper.categoryToCategoryDTO(save(id, category));
-        result.setUrl("/api/v1/category/" + id);
+        result.setUrl("/api/v1/categories/" + id);
         return result;
     }
 
