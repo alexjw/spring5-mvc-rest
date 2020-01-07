@@ -31,7 +31,7 @@ public class CustomerServiceImpl extends BaseService<Customer, CustomerDTO, Cust
                     customerDTO.setUrl("/api/v1/customers/" + id);
                     return customerDTO;
                 })
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(ResourceNotFoundException::new);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class CustomerServiceImpl extends BaseService<Customer, CustomerDTO, Cust
             CustomerDTO customerDTO = superMapper.customerMapper.customerToCustomerDTO(repository.save(customer));
             customerDTO.setUrl("/api/v1/customers/" + id);
             return customerDTO;
-        }).orElseThrow(RuntimeException::new);
+        }).orElseThrow(ResourceNotFoundException::new);
     }
 
     /*@Override
