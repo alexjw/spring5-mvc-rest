@@ -70,7 +70,9 @@ public class CustomerServiceImpl extends BaseService<Customer, CustomerDTO, Cust
                 customer.setLastName(dto.getLastName());
             }
 
-            return superMapper.customerMapper.customerToCustomerDTO(repository.save(customer));
+            CustomerDTO customerDTO = superMapper.customerMapper.customerToCustomerDTO(repository.save(customer));
+            customerDTO.setUrl("/api/v1/customers/" + id);
+            return customerDTO;
         }).orElseThrow(RuntimeException::new);
     }
 
