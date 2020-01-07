@@ -33,4 +33,9 @@ public class CategoryServiceImpl extends BaseService<Category, CategoryDTO, Cate
     public CategoryDTO getById(Long id) {
         return superMapper.categoryMapper.categoryToCategoryDTO(getDomainById(id));
     }
+
+    @Override
+    public CategoryDTO createNew(CategoryDTO dto) {
+        return null;
+    }
 }

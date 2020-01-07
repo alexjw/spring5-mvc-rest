@@ -26,4 +26,18 @@ public class CustomerServiceImpl extends BaseService<Customer, CustomerDTO, Cust
         return superMapper.customerMapper.customerToCustomerDTO(getDomainById(id));
     }
 
+    @Override
+    public CustomerDTO createNew(CustomerDTO customerDTO) {
+
+        Customer customer = superMapper.customerMapper.customerDTOToCustomer(customerDTO);
+
+        Customer savedCustomer = repository.save(customer);
+
+        CustomerDTO returnDto = superMapper.customerMapper.customerToCustomerDTO(savedCustomer);
+
+        returnDto.setUrl("/api/v1/customer/" + savedCustomer.getId());
+
+        return returnDto;
+    }
+
 }

@@ -10,4 +10,6 @@ public interface BaseServiceInterface<DOM extends BaseDomain, DTO extends BaseDT
     public List<DTO> getAllDTO();
 
     public DTO getById(Long id);
+
+    public DTO createNew(DTO dto);
 }
