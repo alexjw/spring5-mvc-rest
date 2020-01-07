@@ -34,4 +34,8 @@ public abstract class BaseService<DOM extends BaseDomain, DTO extends BaseDTO, R
         return repository.save(dom);
     }
 
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
+
 }

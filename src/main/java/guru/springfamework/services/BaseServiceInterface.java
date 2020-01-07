@@ -17,5 +17,7 @@ public interface BaseServiceInterface<DOM extends BaseDomain, DTO extends BaseDT
 
     public DOM save(Long id, DOM dom);
 
-    DTO patch(Long id, DTO dto);
+    public DTO patch(Long id, DTO dto);
+
+    public void delete(Long id);
 }
