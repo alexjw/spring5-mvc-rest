@@ -3,6 +3,7 @@ package guru.springfamework.services;
 import guru.springfamework.api.v1.mapper.CategoryMapper;
 import guru.springfamework.api.v1.mapper.CustomerMapper;
 import guru.springfamework.api.v1.mapper.SuperMapper;
+import guru.springfamework.api.v1.mapper.VendorMapper;
 import guru.springfamework.api.v1.model.CategoryDTO;
 import guru.springfamework.domain.Category;
 import guru.springfamework.repositories.CategoryRepository;
@@ -38,7 +39,7 @@ public class CategoryServiceTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        SuperMapper superMapper = new SuperMapper(customerMapper, categoryMapper);
+        SuperMapper superMapper = new SuperMapper();
 
         categoryService = new CategoryServiceImpl(categoryRepository, superMapper);
     }

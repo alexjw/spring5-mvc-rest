@@ -17,9 +17,18 @@ public class SuperMapper {
 
     public CategoryMapper categoryMapper;
 
-    public SuperMapper(CustomerMapper customerMapper, CategoryMapper categoryMapper) {
+    public VendorMapper vendorMapper;
+
+    public SuperMapper() {
+        this.customerMapper = CustomerMapper.INSTANCE;
+        this.categoryMapper = CategoryMapper.INSTANCE;
+        this.vendorMapper = VendorMapper.INSTANCE;
+    }
+
+    public SuperMapper(CustomerMapper customerMapper, CategoryMapper categoryMapper, VendorMapper vendorMapper) {
         this.customerMapper = customerMapper;
         this.categoryMapper = categoryMapper;
+        this.vendorMapper = vendorMapper;
     }
 
     public List<CustomerDTO> convertCustomerDomainListToDTO(List<Customer> customers) {
