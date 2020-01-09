@@ -1,6 +1,7 @@
 package guru.springfamework.api.v1.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.persistence.MappedSuperclass;
@@ -9,6 +10,7 @@ import javax.persistence.MappedSuperclass;
 @Data
 public class BaseDTO {
 
+    @ApiModelProperty(value = "This is the id")
     private Long id;
 
     @JsonProperty("url")
